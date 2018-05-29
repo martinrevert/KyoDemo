@@ -90,17 +90,16 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
             JsonObject message = new JsonObject();
             try {
+                message.addProperty("deviceId", "1122334455668899");
+                message.addProperty("deviceName", "SCANNER");
+                //En devices ficticios no es necesario enviar protocolo
+                //message.addProperty("protocol", "zigbee");
+                message.addProperty("barcode", barcode.getDisplayValue());
+                message.addProperty("user", "Martin");
 
-                //message.addProperty("deviceId", "0011223344558899");
-                message.addProperty("deviceId", "0011223344556677");
-                message.addProperty("deviceName", "ASHRAE");
-                //  message.addProperty("deviceName", "SCANNER");
-
-                message.addProperty("protocol", "zigbee");
-                //message.addProperty("barcode", barcode.getDisplayValue());
-                //message.addProperty("user", "Martin");
-                message.addProperty("quality",80);
-
+                //message.addProperty("deviceId", "0011223344556677");
+                //message.addProperty("deviceName", "ASHRAE");
+                //message.addProperty("quality",80);
             } catch (JsonIOException e) {
                 e.printStackTrace();
             }
