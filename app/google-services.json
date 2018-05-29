@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "746745026589",
+    "firebase_url": "https://kyocera-demo.firebaseio.com",
+    "project_id": "kyocera-demo",
+    "storage_bucket": "kyocera-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746745026589:android:09546560b4505797",
+        "android_client_info": {
+          "package_name": "io.webee.scanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746745026589-nb81afur4r3fsoo8ckcbnciijnmcnbar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.webee.scanner",
+            "certificate_hash": "51ef1d7e3e3d74edbde7e83442c8c01ff3e0b9f0"
+          }
+        },
+        {
+          "client_id": "746745026589-8vrmj29scdp46kdp54i9b8re1nsbbb7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmrUiCyg3NQWUCIBJaRsyQ45CnIIVIyw4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746745026589-8vrmj29scdp46kdp54i9b8re1nsbbb7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
