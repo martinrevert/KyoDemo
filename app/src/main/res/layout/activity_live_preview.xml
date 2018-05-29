@@ -17,16 +17,17 @@
             android:id="@+id/firePreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_centerHorizontal="true"
+
+            >
 
             <io.webee.scanner.GraphicOverlay
                 android:id="@+id/fireFaceOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true" />
+
+
+                />
         </io.webee.scanner.CameraSourcePreview>
     </RelativeLayout>
 
@@ -41,13 +42,14 @@
         android:textStyle="bold" />
 
     <RelativeLayout
-        android:id="@+id/webview"
+        android:id="@+id/webviewrapper"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/surfaceviewwrapper">
 
         <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>
@@ -58,7 +60,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_toEndOf="@id/webview"
+        android:layout_toEndOf="@+id/surfaceviewrapper"
         android:background="#000">
 
 
@@ -67,12 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-        <Button
-            android:id="@+id/emit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Emit"/>
+
         <ToggleButton
             android:id="@+id/facingswitch"
             android:layout_width="48dp"
