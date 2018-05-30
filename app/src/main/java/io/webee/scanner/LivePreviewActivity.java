@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.media.MediaPlayer;
 import android.net.Uri;
 
 
@@ -84,9 +85,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     private WebView webView;
     private CustomTabsClient mClient;
     private String url;
-
-
-    private Context context;
+    private MediaPlayer mp;
     private BarcodeScanningProcessor barcodeScanningProcessor;
     private int connectionIntents = 0;
 
@@ -128,10 +127,8 @@ public final class LivePreviewActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-
-        context = this;
-
         setContentView(R.layout.activity_live_preview);
+        mp = MediaPlayer.create(this, R.raw.fuzzybeep);
 
         preview = (CameraSourcePreview) findViewById(R.id.firePreview);
         if (preview == null) {
@@ -146,7 +143,6 @@ public final class LivePreviewActivity extends AppCompatActivity
         List<String> options = new ArrayList<>();
 
         options.add(BARCODE_DETECTION);
-
 
         // Creating adapter for spinner for future features (NFC, BLE Beacon, etc)
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
@@ -250,7 +246,7 @@ public final class LivePreviewActivity extends AppCompatActivity
             return;
         }
         connectionIntents++;
-        socketManager = new SocketManager(context);
+        socketManager = new SocketManager(this);
         IO.Options opts = new IO.Options();
         opts.transports = new String[]{WebSocket.NAME};
         //opts.forceNew = true;
@@ -271,7 +267,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context, "Socket disconnected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LivePreviewActivity.this, "Socket disconnected", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -323,7 +319,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         switch (model) {
             case BARCODE_DETECTION:
                 Log.i(TAG, "Using Barcode Detector Processor");
-                barcodeScanningProcessor = new BarcodeScanningProcessor(this);
+                barcodeScanningProcessor = new BarcodeScanningProcessor();
                 cameraSource.setMachineLearningFrameProcessor(barcodeScanningProcessor);
                 break;
 
@@ -373,6 +369,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         BarcodeScanningProcessor.unSubscribeToListener();
         ConnectionManager.unSubscribeToListener();
         preview.stop();
+
     }
 
     @Override
@@ -510,6 +507,12 @@ public final class LivePreviewActivity extends AppCompatActivity
     @Override
     public void onReadBarCode(JsonObject message) {
         Log.v(TAG, "message" + message);
+        //ToDo MediaPlyer sonido de scaneo
+        if (!mp.isPlaying()) {
+            mp.start();
+        }
         socketManager.getSocket().emit("webee-hub-logger", message);
     }
+
+
 }

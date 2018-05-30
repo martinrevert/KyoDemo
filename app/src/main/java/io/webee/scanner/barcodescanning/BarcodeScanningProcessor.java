@@ -1,8 +1,6 @@
 package io.webee.scanner.barcodescanning;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -20,7 +18,6 @@ import java.util.List;
 
 import io.webee.scanner.FrameMetadata;
 import io.webee.scanner.GraphicOverlay;
-import io.webee.scanner.R;
 import io.webee.scanner.VisionProcessorBase;
 
 
@@ -30,8 +27,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
     private final FirebaseVisionBarcodeDetector detector;
     private static onReadBarCodeListener onReadBarCodeListener;
-    private MediaPlayer mp;
-    private Context context;
+
 
     public interface onReadBarCodeListener {
         public void onReadBarCode(JsonObject eventLog);
@@ -46,14 +42,14 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     }
 
 
-    public BarcodeScanningProcessor(Context context) {
+    public BarcodeScanningProcessor() {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
         // new FirebaseVisionBarcodeDetectorOptions.Builder()
         //     .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
         //     .build();
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
-        this.context = context;
+
     }
 
     @Override
@@ -82,9 +78,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
 
-            //ToDo MediaPlyer sonido de scaneo
-            mp = MediaPlayer.create(context, R.raw.fuzzybeep);
-            mp.start();
+
 
             Log.v("BarcodeScanningProcessor", "Scan succesful");
 
