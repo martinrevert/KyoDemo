@@ -167,8 +167,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
         connectSocketViot();
 
-
-        url = "https://visual.webee.io/apps/view/5b0c45176e06475826e022a6/3bd115f0-d9fc-40e9-bb48-93bfcc6cdaeb";
+        url = Constants.FORM_FLOW_PAGE;
 
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             warmUpChrome();

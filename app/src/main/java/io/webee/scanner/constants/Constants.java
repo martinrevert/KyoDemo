@@ -11,6 +11,8 @@ public class Constants {
     public static final String VIOT_BASE_URL = "https://visual.webee.io";
     public static final String VIOT_BASE_URL_ALTERNATIVE = "http://setup.visual.webee.io";
 
+    public static final String FORM_FLOW_PAGE = "https://visual.webee.io/apps/view/5b0c45176e06475826e022a6/3bd115f0-d9fc-40e9-bb48-93bfcc6cdaeb";
+
 
 
 
