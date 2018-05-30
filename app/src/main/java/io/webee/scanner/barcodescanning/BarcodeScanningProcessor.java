@@ -1,6 +1,8 @@
 package io.webee.scanner.barcodescanning;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -20,6 +22,7 @@ import io.webee.scanner.FrameMetadata;
 import io.webee.scanner.GraphicOverlay;
 import io.webee.scanner.VisionProcessorBase;
 
+import static android.content.Context.MODE_PRIVATE;
 
 public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseVisionBarcode>> {
 
@@ -27,6 +30,8 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
     private final FirebaseVisionBarcodeDetector detector;
     private static onReadBarCodeListener onReadBarCodeListener;
+
+    private SharedPreferences preference;
 
 
     public interface onReadBarCodeListener {
@@ -42,13 +47,14 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     }
 
 
-    public BarcodeScanningProcessor() {
+    public BarcodeScanningProcessor(Context context) {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
         // new FirebaseVisionBarcodeDetectorOptions.Builder()
         //     .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
         //     .build();
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
+        preference = context.getSharedPreferences("Reg", MODE_PRIVATE);
 
     }
 
@@ -78,8 +84,6 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
 
-
-
             Log.v("BarcodeScanningProcessor", "Scan succesful");
 
             JsonObject message = new JsonObject();
@@ -89,7 +93,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
                 //En devices ficticios no es necesario enviar protocolo
                 //message.addProperty("protocol", "zigbee");
                 message.addProperty("barcode", barcode.getDisplayValue());
-                message.addProperty("user", "Martin");
+                message.addProperty("user" , preference.getString("user",""));
 
                 //message.addProperty("deviceId", "0011223344556677");
                 //message.addProperty("deviceName", "ASHRAE");

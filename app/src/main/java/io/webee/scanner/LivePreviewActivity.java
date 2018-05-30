@@ -318,7 +318,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         switch (model) {
             case BARCODE_DETECTION:
                 Log.i(TAG, "Using Barcode Detector Processor");
-                barcodeScanningProcessor = new BarcodeScanningProcessor();
+                barcodeScanningProcessor = new BarcodeScanningProcessor(this);
                 cameraSource.setMachineLearningFrameProcessor(barcodeScanningProcessor);
                 break;
 
