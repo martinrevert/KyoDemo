@@ -46,7 +46,7 @@
     <string name="action_sign_in_short">Log In</string>
     <string name="action_sign_in">Log In</string>
     <string name="error_incorrect_password">Password is incorrect</string>
-    <string name="error_field_required">A password is required</string>
+    <string name="error_field_required">User is required for log in</string>
     <string name="error_invalid_password">A correct password is required</string>
 
 </resources>

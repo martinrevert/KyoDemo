@@ -80,7 +80,7 @@ public final class LoginActivity extends AppCompatActivity
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.linearLayout);
         mProgressView = (ProgressBar) findViewById(R.id.login_progress);
     }
 
