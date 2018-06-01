@@ -17,10 +17,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.common.images.Size;
 
@@ -46,8 +48,7 @@ public class CameraSourcePreview extends ViewGroup {
         startRequested = false;
         surfaceAvailable = false;
 
-        //ToDo Test if we can control surfaceview size by example creating in XML
-        //surfaceView = findViewById(R.id.surfaceview);
+        //ToDo Try to Center this dynamic SurfaceView in parent
 
         surfaceView = new SurfaceView(context);
         surfaceView.getHolder().addCallback(new SurfaceCallback());
@@ -131,9 +132,31 @@ public class CameraSourcePreview extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        int width = 320;
-        int height = 240;
+
+
+// pixels, dpi
+        DisplayMetrics metrics = new DisplayMetrics();
+        getDisplay().getRealMetrics(metrics);
+        int heightPixels = metrics.heightPixels;
+        int widthPixels = metrics.widthPixels;
+        int densityDpi = metrics.densityDpi;
+        float xdpi = metrics.xdpi;
+        float ydpi = metrics.ydpi;
+        Log.i(TAG, "widthPixels  = " + widthPixels);
+        Log.i(TAG, "heightPixels = " + heightPixels);
+        Log.i(TAG, "densityDpi   = " + densityDpi);
+        Log.i(TAG, "xdpi         = " + xdpi);
+        Log.i(TAG, "ydpi         = " + ydpi);
+
+
+        //int width = 320;
+        //int height = 240;
+
+        int width = Math.round(xdpi);
+        int height = Math.round(ydpi);
+
         if (cameraSource != null) {
+
             Size size = cameraSource.getPreviewSize();
             if (size != null) {
                 width = size.getWidth();
@@ -142,13 +165,14 @@ public class CameraSourcePreview extends ViewGroup {
             }
         }
 
+    /*
         // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
         if (isPortraitMode()) {
             int tmp = width;
             width = height;
             height = tmp;
         }
-
+        */
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
 

@@ -506,12 +506,10 @@ public final class LivePreviewActivity extends AppCompatActivity
     @Override
     public void onReadBarCode(JsonObject message) {
         Log.v(TAG, "message" + message);
-        //ToDo MediaPlyer sonido de scaneo
         if (!mp.isPlaying()) {
             mp.start();
         }
         socketManager.getSocket().emit("webee-hub-logger", message);
     }
-
 
 }

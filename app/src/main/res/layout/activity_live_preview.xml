@@ -9,9 +9,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/surfaceviewwrapper"
+        android:id="@+id/surfaceview"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="200dp">
 
         <io.webee.scanner.CameraSourcePreview
             android:id="@+id/firePreview"
@@ -44,9 +44,9 @@
     <RelativeLayout
         android:id="@+id/webviewrapper"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/surfaceviewwrapper">
+        android:layout_below="@+id/surfaceview">
 
         <WebView
             android:id="@+id/webview"
