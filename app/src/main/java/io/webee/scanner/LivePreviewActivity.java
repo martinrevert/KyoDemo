@@ -485,7 +485,7 @@ public final class LivePreviewActivity extends AppCompatActivity
                             requestJSONObject.put("id", json.getString("id"));
                             requestJSONObject.put("connectionId", json.getString("connectionId"));
                             requestJSONObject.put("agent", "hub");
-                            requestJSONObject.put("uuid", "ACDBDA37565C");
+                            requestJSONObject.put("uuid", "AndroidKyoceraApp");
                             socketManager.getSocket().emit("webee-auth-strategy", requestJSONObject);
                             Log.i(TAG, "json: " + requestJSONObject);
                         }

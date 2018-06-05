@@ -149,11 +149,11 @@ public class CameraSourcePreview extends ViewGroup {
         Log.i(TAG, "ydpi         = " + ydpi);
 
 
-        //int width = 320;
-        //int height = 240;
+        int width = 50;
+        int height = 50;
 
-        int width = Math.round(xdpi);
-        int height = Math.round(ydpi);
+        //int width = Math.round(xdpi);
+        //int height = Math.round(ydpi);
 
         if (cameraSource != null) {
 
